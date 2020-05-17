@@ -37,19 +37,55 @@ spark = SparkSession.builder.appName("Sparkify").getOrCreate()
 
 # Read in full sparkify dataset
 def read_dataset(file_path):
+
+    #Returns spark dataframe.
+
+    #Parameters:
+    #    file_path where the source located
+
+    #Returns:
+    #    spark df from filepath
+
     return spark.read.json(file_path)  
 
-def prepare_dataset(df):
+def clean_dataset(df):
+
+    #Returns spark dataframe.
+
+    #Parameters:
+    #    spark df input
+
+    #Returns:
+    #    spark df after filtering empty userId
+
     return df.filter(df.userId != '')    
 
-def get_browser(x):
+def get_browser(user_agent):
+
+    #Returns browser name.
+
+    #Parameters:
+    #    user_agent string
+
+    #Returns:
+    #    r : name of the browser extracted from user agent string
     try :
-        r = httpagentparser.detect(x)['browser']['name']
+        r = httpagentparser.detect(user_agent)['browser']['name']
     except:
         r = ''
     return r
     
 def prepare_feature(df):
+
+    #Returns spark dataframe with extracted features and list of features columns.
+
+    #Parameters:
+    #    spark df input
+
+    #Returns:
+    #    full_feature : spark df with more feature columns and churn columns
+    #    features_col : list of feature names
+
     df.createOrReplaceTempView("event")
 
     #Create new view with churn columns
@@ -117,6 +153,20 @@ def prepare_feature(df):
     return full_feature, features_col
 
 def train_test_model(df, model, modelName, paramGrid, features_col):
+
+    #Returns machine learning model in crossvalidator object
+
+    #Parameters:
+    #    df    : spark df input
+    #    model : machine learning model from pyspark.ml.classification
+    #    modelName : name of ML model
+    #    paramGrid : Param grid object to run the model over few params
+    #    features_col : List of feature names
+
+    #Returns:
+    #    cvModel : Machine learning model stored in Crossvalidator object
+
+
     assembler = VectorAssembler(inputCols=features_col, outputCol="feature_vec")
 
     df = assembler.setHandleInvalid("skip").transform(df)
@@ -146,7 +196,7 @@ def train_test_model(df, model, modelName, paramGrid, features_col):
 
 event_data = "mini_sparkify_event_data.json"
 df = read_dataset(event_data)
-df_cleaned = prepare_dataset(df)
+df_cleaned = clean_dataset(df)
 full_feature, features_col = prepare_feature(df_cleaned)
 
 
