@@ -116,10 +116,10 @@ def prepare_feature(df):
 
     return full_feature, features_col
 
-def train_test_model(df, model, modelName, paramGrid):
+def train_test_model(df, model, modelName, paramGrid, features_col):
     assembler = VectorAssembler(inputCols=features_col, outputCol="feature_vec")
 
-    df = assembler.setHandleInvalid("skip").transform(full_feature)
+    df = assembler.setHandleInvalid("skip").transform(df)
     train, test = df.randomSplit([0.8, 0.2], seed=42)
 
     indexer = StringIndexer(inputCol="churn", outputCol="label")
@@ -154,27 +154,27 @@ full_feature, features_col = prepare_feature(df_cleaned)
 # Logistic Regression
 lr =  LogisticRegression(maxIter=10, regParam=0.0, elasticNetParam=0, featuresCol='scaled_features')
 paramGrid_lr = ParamGridBuilder().addGrid(lr.regParam,[0.0, 0.1, 1]).build()
-cvModel_lr = train_test_model(full_feature, lr, 'Logistic Regression',paramGrid_lr)
+cvModel_lr = train_test_model(full_feature, lr, 'Logistic Regression',paramGrid_lr,features_col)
 
 
 # Gradient Boosting
 gbt = GBTClassifier(labelCol="label", featuresCol="scaled_features", maxIter=10)
 paramGrid_gbt = ParamGridBuilder().build()
-cvModel_gbt = train_test_model(full_feature, gbt, 'Gradient Boosting',paramGrid_gbt)
+cvModel_gbt = train_test_model(full_feature, gbt, 'Gradient Boosting',paramGrid_gbt,features_col)
 
 
 
 #Naive Bayes
 nb = NaiveBayes(smoothing=1.0, modelType="multinomial",featuresCol='scaled_features')
 paramGrid_nb = ParamGridBuilder().build()
-cvModel_nb = train_test_model(full_feature, nb, 'Naive Bayes',paramGrid_nb)
+cvModel_nb = train_test_model(full_feature, nb, 'Naive Bayes',paramGrid_nb,features_col)
 
 
 
 #Random Forrest
 rf = RandomForestClassifier(labelCol="label", featuresCol="scaled_features", numTrees=10)
 paramGrid_rf = ParamGridBuilder().build()
-cvModel_rf = train_test_model(full_feature, rf, 'Random Forrest',paramGrid_rf)
+cvModel_rf = train_test_model(full_feature, rf, 'Random Forrest',paramGrid_rf,features_col)
 
 
 
