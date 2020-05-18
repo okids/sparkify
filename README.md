@@ -17,6 +17,8 @@ Conda python3 with these additional requirements :
 - httpagentparser
 - Seaborn
 
+Please note you need to install Spark before running the scripts. On this project I used spark from Udacity workspace for small dataset and applied the code on full dataset using [Amazon EMR](https://towardsdatascience.com/getting-started-with-pyspark-on-amazon-emr-c85154b6b921). 
+
 ## Project Motivation <a name="projectmotivation"></a>
 This project will help Sparkify streaming service to retain customer who will be churn in the future.
 
@@ -34,4 +36,4 @@ The scripts are classified into 2, script for small dataset and full dataset. Th
 Detailed explanation can be found on Medium link [here](NA).
 
 ## Licensing, Authors, and Acknowledgements  <a name="licensingauthorsandacknowledgements"></a>
-Thanks to [udacity](https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009t) for providing the data and jupyter notebook workspace for this Sparkify Project
+Thanks to [udacity](https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009t) for providing the data and workspace for this Sparkify Project
