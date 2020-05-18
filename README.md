@@ -33,7 +33,7 @@ The scripts are classified into 2, script for small dataset and full dataset. Th
 4 machine learning models are used : Naive Bayes, Random Forrest, Gradient Boosting and Logistic Regression. On small dataset, Logistic Regression has the highest F1-Score with 0.772 while Naive Bayes has the lowest F1-Score with 0.61. On full dataset, Gradient Boosting has the highest F1-score with 0.844. One of the possible explanation why Gradient Boosting do well in Full dataset is because in full dataset number of userId is enough to generalized the model (22,278 vs 225 userId). 
 
 
-Detailed explanation can be found on Medium link [here](NA).
+Detailed explanation can be found on Medium link [here](https://medium.com/@o.dwisaputro/how-to-predict-churn-customers-using-machine-learning-sparkify-project-7b8a688b4455).
 
 ## Licensing, Authors, and Acknowledgements  <a name="licensingauthorsandacknowledgements"></a>
 Thanks to [udacity](https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009t) for providing the data and workspace for this Sparkify Project
