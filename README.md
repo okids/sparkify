@@ -26,7 +26,7 @@ This project will help Sparkify streaming service to retain customer who will be
 - sparkify.py        : Python script to run the training and testing (without saving the model) and print the F1 & accuracy.
 
 ## Result <a name="results"></a>
-The scripts are classified into 2, script for small dataset and full dataset. The modelling approach is quite difference between those two as I reduce the numbers of features in full dataset to make the performance better.
+The scripts are classified into 2, script for small dataset and full dataset. The modelling approach is different between those two as I reduce the numbers of features in full dataset to make the performance better.
 
 4 machine learning models are used : Naive Bayes, Random Forrest, Gradient Boosting and Logistic Regression. On small dataset, Logistic Regression has the highest F1-Score with 0.772 while Naive Bayes has the lowest F1-Score with 0.61. On full dataset, Gradient Boosting has the highest F1-score with 0.844. One of the possible explanation why Gradient Boosting do well in Full dataset is because in full dataset number of userId is enough to generalized the model (22,278 vs 225 userId). 
 
